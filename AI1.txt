@@ -1,0 +1,54 @@
+def dfs_recursive(graph,start,visited=None):
+    if visited is None:
+        visited=set()
+    visited.add(start)
+    print(start,end=" ")
+    for next in graph[start]:
+        if next not in visited:
+            dfs_recursive(graph,next,visited)
+    return visited
+
+
+b_visited=[]
+queue=[]
+def bfs_recursive(graph,start,visited=None):  
+    b_visited.append(start)
+    queue.append(start)
+
+    while queue:          
+        m = queue.pop(0)
+        print (m, end = " ")
+        for neighbour in graph[m]:
+            if neighbour not in b_visited:
+                b_visited.append(neighbour)
+                queue.append(neighbour)
+
+        #hktsgxc;
+   
+
+def create_graph():
+    graph={}
+    num_edges=int(input("Enter the number of edges : "))
+    for i in range(num_edges):
+        src,dest=input("Enter edge (source destination):").split()
+        if src not in graph:
+            graph[src]=[]
+        if dest not in graph:
+            graph[dest]=[]
+        graph[src].append(dest)
+        graph[dest].append(src)
+    return graph
+   
+def get_start_node():
+    start_node=input("Enter the starting node : ")
+    return start_node
+                 
+                 
+if __name__ =="__main__":
+    graph=create_graph()
+    start_node=get_start_node()
+    print("DFS Traversal : ")
+    dfs_recursive(graph,start_node)
+    print("")
+    print ("BFS Traversal : ")
+    bfs_recursive(graph,start_node)
